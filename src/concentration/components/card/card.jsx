@@ -15,12 +15,15 @@ class Card extends Component {
             value = styles.faceDown;
         }
 
+
         // console.log(this.props.card.isMatched)
         return(
-            <div className={`${value}`} onClick={this.props.onClick}>
-                {
-                    this.props.card.isFaceUp? card.emoji: ''
-                }
+            <div className={`${styles.container} ${value}`} onClick={this.props.onClick}>
+                <div className={`${value}`}>
+                    {
+                        this.props.card.isFaceUp? card.emoji: ''
+                    }
+                </div>
                 {/* <span>X</span> */}
             </div>
         );

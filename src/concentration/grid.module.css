@@ -9,3 +9,11 @@
     gap: 2px;
     padding: 2px;
 }
+
+.menu {
+    grid-column-start: 1;
+    grid-column-end: -1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

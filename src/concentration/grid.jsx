@@ -2,6 +2,12 @@ import React, { Component } from "react";
 import styles from "./grid.module.css";
 import Card from './components/card/card';
 
+/**
+ * TODO: Add the ability for the user to add Number of cards
+ * TODO: Add New Game Button
+ * TODO: Add Restart Button
+ * TODO: Make the cards flip
+ */
 const NUMBER_OF_PAIRS_OF_CARDS = 8;
 let indexOfTheOnlyFacedUpCard = -1;
 
@@ -16,31 +22,7 @@ class Grid extends Component {
 
     componentDidMount() {
     // initialize the grid in here.
-        const grid = [];
-        const emojies = ['👹', '👺', '🤡', '💩', '👻', '👾', '🤖', '👽'];
-        for(let i = 0; i < NUMBER_OF_PAIRS_OF_CARDS; i++) {
-            
-            //each card has the following properties.
-            const card = {
-                isFaceUp: false,
-                isMatched: false,
-                identifier: i,
-                emoji: emojies[i],
-            };
-            let secondCard = {...card};
-            grid.push(card);
-            grid.push(secondCard);
-        }
-
-        // randomize the cards
-        for (let i = 0; i < NUMBER_OF_PAIRS_OF_CARDS * 2; i++) {
-            let temp = grid[i];
-            let rand = Math.floor(Math.random() * i);
-            grid[i] = grid[rand];
-            grid[rand] = temp;
-        }
-        
-        this.setState({grid});
+        this.intializeGame();
     
     }
 
@@ -85,6 +67,39 @@ class Grid extends Component {
         
     }
 
+    newGame = () => {
+        this.intializeGame();
+    }
+
+    // initializes game. also called for new Game or restart.
+    intializeGame = () => {
+        const grid = [];
+        const emojies = ['👹', '👺', '🤡', '💩', '👻', '👾', '🤖', '👽'];
+        for (let i = 0; i < NUMBER_OF_PAIRS_OF_CARDS; i++) {
+
+            //each card has the following properties.
+            const card = {
+                isFaceUp: false,
+                isMatched: false,
+                identifier: i,
+                emoji: emojies[i],
+            };
+            let secondCard = { ...card };
+            grid.push(card);
+            grid.push(secondCard);
+        }
+
+        // randomize the cards
+        for (let i = 0; i < NUMBER_OF_PAIRS_OF_CARDS * 2; i++) {
+            let temp = grid[i];
+            let rand = Math.floor(Math.random() * i);
+            grid[i] = grid[rand];
+            grid[rand] = temp;
+        }
+
+        this.setState({ grid });
+    }
+
     renderCard = (index) => {
         return (
             <Card
@@ -105,6 +120,9 @@ class Grid extends Component {
                         return this.renderCard(index)
                     })
                 }
+                <div className={styles.menu}>
+                    <button onClick={this.newGame}>New Game / Restart</button>
+                </div>
             </div>
         );
     }
