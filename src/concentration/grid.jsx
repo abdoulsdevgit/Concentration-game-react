@@ -18,6 +18,7 @@ class Grid extends Component {
         this.state = {
             grid: [],
         };
+
     }
 
     componentDidMount() {
@@ -108,6 +109,7 @@ class Grid extends Component {
                 onClick={() => this.handleClick(index)}
             />
         );
+        
     }
 
     render() {
